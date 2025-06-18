@@ -8,20 +8,14 @@ use Tourze\DoctrineIpBundle\Attribute\CreateIpColumn;
 use Tourze\DoctrineIpBundle\Attribute\UpdateIpColumn;
 use Tourze\DoctrineSnowflakeBundle\Service\SnowflakeIdGenerator;
 use Tourze\DoctrineTimestampBundle\Traits\TimestampableAware;
-use Tourze\EasyAdmin\Attribute\Column\ExportColumn;
-use Tourze\EasyAdmin\Attribute\Column\ListColumn;
-use Tourze\EasyAdmin\Attribute\Permission\AsPermission;
 use WechatOfficialAccountBundle\Entity\Account;
 use WechatOfficialAccountDraftBundle\Repository\DraftRepository;
 
-#[AsPermission(title: '草稿')]
 #[ORM\Entity(repositoryClass: DraftRepository::class)]
 #[ORM\Table(name: 'wechat_official_account_draft', options: ['comment' => '草稿'])]
-class Draft
+class Draft implements \Stringable
 {
     use TimestampableAware;
-    #[ExportColumn]
-    #[ListColumn(order: -1, sorter: true)]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(SnowflakeIdGenerator::class)]
@@ -32,7 +26,7 @@ class Draft
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private Account $account;
 
-    #[ORM\Column(length: 120, nullable: true)]
+    #[ORM\Column(length: 120, nullable: true, options: ['comment' => '媒体ID'])]
     private ?string $mediaId = null;
 
     #[CreateIpColumn]
@@ -94,4 +88,10 @@ class Draft
     public function getUpdatedFromIp(): ?string
     {
         return $this->updatedFromIp;
-    }}
+    }
+
+    public function __toString(): string
+    {
+        return $this->mediaId ?? 'New Draft';
+    }
+}
