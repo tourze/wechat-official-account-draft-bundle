@@ -2,7 +2,7 @@
 
 namespace WechatOfficialAccountDraftBundle\Tests\Entity;
 
-use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use WechatOfficialAccountBundle\Entity\Account;
 use WechatOfficialAccountDraftBundle\Entity\Draft;
@@ -95,7 +95,7 @@ class DraftTest extends TestCase
 
     public function testSetCreateTime_setsDateTime(): void
     {
-        $dateTime = new DateTime();
+        $dateTime = new DateTimeImmutable();
         $this->draft->setCreateTime($dateTime);
         
         $this->assertSame($dateTime, $this->draft->getCreateTime());
@@ -108,7 +108,7 @@ class DraftTest extends TestCase
 
     public function testSetUpdateTime_setsDateTime(): void
     {
-        $dateTime = new DateTime();
+        $dateTime = new DateTimeImmutable();
         $this->draft->setUpdateTime($dateTime);
         
         $this->assertSame($dateTime, $this->draft->getUpdateTime());
