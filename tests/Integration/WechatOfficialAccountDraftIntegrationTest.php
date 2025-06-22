@@ -23,7 +23,8 @@ class WechatOfficialAccountDraftIntegrationTest extends KernelTestCase
         parent::setUp();
         self::bootKernel();
         
-        // 创建模拟服务        $officialAccountClientMock = $this->createMock(OfficialAccountClient::class);
+        // 创建模拟服务
+        $officialAccountClientMock = $this->createMock(OfficialAccountClient::class);
         
         // 设置合成服务
         $container = self::getContainer();

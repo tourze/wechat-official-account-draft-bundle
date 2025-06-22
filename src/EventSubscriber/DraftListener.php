@@ -24,7 +24,7 @@ class DraftListener
 
     public function preRemove(Draft $object): void
     {
-        if (!$object->getMediaId()) {
+        if ($object->getMediaId() === null) {
             return;
         }
 
