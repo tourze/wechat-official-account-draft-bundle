@@ -1,28 +1,41 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WechatOfficialAccountDraftBundle\Tests\DependencyInjection;
 
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Tourze\PHPUnitSymfonyUnitTest\AbstractDependencyInjectionExtensionTestCase;
 use WechatOfficialAccountDraftBundle\DependencyInjection\WechatOfficialAccountDraftExtension;
 
-class WechatOfficialAccountDraftExtensionTest extends TestCase
+/**
+ * @internal
+ */
+#[CoversClass(WechatOfficialAccountDraftExtension::class)]
+final class WechatOfficialAccountDraftExtensionTest extends AbstractDependencyInjectionExtensionTestCase
 {
     private ContainerBuilder $container;
-    private WechatOfficialAccountDraftExtension $extension;
-    
+
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->container = new ContainerBuilder();
-        $this->extension = new WechatOfficialAccountDraftExtension();
+        $this->container->setParameter('kernel.environment', 'test');
     }
 
-    public function testLoad_doesNotThrowException(): void
+    private function createExtension(): WechatOfficialAccountDraftExtension
+    {
+        return new WechatOfficialAccountDraftExtension();
+    }
+
+    public function testLoadDoesNotThrowException(): void
     {
         $this->expectNotToPerformAssertions();
-        
+
         // 如果加载过程中有任何问题，会抛出异常
-        $this->extension->load([], $this->container);
+        $extension = $this->createExtension();
+        $extension->load([], $this->container);
     }
-} 
+}

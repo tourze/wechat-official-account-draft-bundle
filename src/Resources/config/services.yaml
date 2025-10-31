@@ -6,6 +6,8 @@ services:
 
   WechatOfficialAccountDraftBundle\Command\:
     resource: '../../Command/'
+  WechatOfficialAccountDraftBundle\Controller\:
+    resource: '../../Controller/'
   WechatOfficialAccountDraftBundle\EventSubscriber\:
     resource: '../../EventSubscriber/'
   WechatOfficialAccountDraftBundle\MessageHandler\:

@@ -1,121 +1,167 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WechatOfficialAccountDraftBundle\Tests\Entity;
 
-use DateTimeImmutable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use Tourze\PHPUnitDoctrineEntity\AbstractEntityTestCase;
 use WechatOfficialAccountBundle\Entity\Account;
 use WechatOfficialAccountDraftBundle\Entity\Draft;
 
-class DraftTest extends TestCase
+/**
+ * @internal
+ */
+#[CoversClass(Draft::class)]
+final class DraftTest extends AbstractEntityTestCase
 {
-    private Draft $draft;
-    
+    protected function createEntity(): object
+    {
+        return new Draft();
+    }
+
+    /**
+     * @return iterable<string, array{string, mixed}>
+     */
+    public static function propertiesProvider(): iterable
+    {
+        return [
+            'account' => ['account', new Account()],
+        ];
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
-        $this->draft = new Draft();
     }
 
-    public function testGetId_returnsNullForNewEntity(): void
+    private function createDraft(): Draft
     {
-        $this->assertNull($this->draft->getId());
+        return new Draft();
     }
 
-    public function testSetAccount_returnsFluentInterface(): void
+    public function testGetIdReturnsNullForNewEntity(): void
     {
+        $draft = $this->createDraft();
+        $this->assertNull($draft->getId());
+    }
+
+    public function testSetAccountSetsAccountCorrectly(): void
+    {
+        // 使用具体类的原因：
+        // 1. 测试需要验证实际Account对象的设置和获取
+        // 2. Account类的属性和方法需要在实际环境中验证
+        // 3. 确保与真实Account对象的兼容性
+        $draft = $this->createDraft();
         $account = $this->createMock(Account::class);
-        $result = $this->draft->setAccount($account);
-        
-        $this->assertSame($this->draft, $result);
+        $draft->setAccount($account);
+
+        $this->assertSame($account, $draft->getAccount());
     }
 
-    public function testGetAccount_returnsSetAccount(): void
+    public function testGetAccountReturnsSetAccount(): void
     {
+        // 使用具体类的原因：
+        // 1. 测试需要验证实际Account对象的设置和获取
+        // 2. Account类的属性和方法需要在实际环境中验证
+        // 3. 确保与真实Account对象的兼容性
+        $draft = $this->createDraft();
         $account = $this->createMock(Account::class);
-        $this->draft->setAccount($account);
-        
-        $this->assertSame($account, $this->draft->getAccount());
+        $draft->setAccount($account);
+
+        $this->assertSame($account, $draft->getAccount());
     }
 
-    public function testSetMediaId_returnsFluentInterface(): void
+    public function testSetMediaIdSetsMediaIdCorrectly(): void
     {
+        $draft = $this->createDraft();
         $mediaId = 'test-media-id';
-        $result = $this->draft->setMediaId($mediaId);
-        
-        $this->assertSame($this->draft, $result);
+        $draft->setMediaId($mediaId);
+
+        $this->assertSame($mediaId, $draft->getMediaId());
     }
 
-    public function testGetMediaId_returnsSetMediaId(): void
+    public function testGetMediaIdReturnsSetMediaId(): void
     {
+        $draft = $this->createDraft();
         $mediaId = 'test-media-id';
-        $this->draft->setMediaId($mediaId);
-        
-        $this->assertSame($mediaId, $this->draft->getMediaId());
+        $draft->setMediaId($mediaId);
+
+        $this->assertSame($mediaId, $draft->getMediaId());
     }
 
-    public function testSetMediaId_acceptsNull(): void
+    public function testSetMediaIdAcceptsNull(): void
     {
-        $this->draft->setMediaId(null);
-        
-        $this->assertNull($this->draft->getMediaId());
+        $draft = $this->createDraft();
+        $draft->setMediaId(null);
+
+        $this->assertNull($draft->getMediaId());
     }
 
-    public function testSetCreatedFromIp_returnsFluentInterface(): void
+    public function testSetCreatedFromIpSetsIpCorrectly(): void
     {
+        $draft = $this->createDraft();
         $ip = '127.0.0.1';
-        $result = $this->draft->setCreatedFromIp($ip);
-        
-        $this->assertSame($this->draft, $result);
+        $draft->setCreatedFromIp($ip);
+
+        $this->assertSame($ip, $draft->getCreatedFromIp());
     }
 
-    public function testGetCreatedFromIp_returnsSetIp(): void
+    public function testGetCreatedFromIpReturnsSetIp(): void
     {
+        $draft = $this->createDraft();
         $ip = '127.0.0.1';
-        $this->draft->setCreatedFromIp($ip);
-        
-        $this->assertSame($ip, $this->draft->getCreatedFromIp());
+        $draft->setCreatedFromIp($ip);
+
+        $this->assertSame($ip, $draft->getCreatedFromIp());
     }
 
-    public function testSetUpdatedFromIp_returnsFluentInterface(): void
+    public function testSetUpdatedFromIpSetsIpCorrectly(): void
     {
+        $draft = $this->createDraft();
         $ip = '127.0.0.1';
-        $result = $this->draft->setUpdatedFromIp($ip);
-        
-        $this->assertSame($this->draft, $result);
+        $draft->setUpdatedFromIp($ip);
+
+        $this->assertSame($ip, $draft->getUpdatedFromIp());
     }
 
-    public function testGetUpdatedFromIp_returnsSetIp(): void
+    public function testGetUpdatedFromIpReturnsSetIp(): void
     {
+        $draft = $this->createDraft();
         $ip = '127.0.0.1';
-        $this->draft->setUpdatedFromIp($ip);
-        
-        $this->assertSame($ip, $this->draft->getUpdatedFromIp());
+        $draft->setUpdatedFromIp($ip);
+
+        $this->assertSame($ip, $draft->getUpdatedFromIp());
     }
 
-    public function testSetCreateTime_setsDateTime(): void
+    public function testSetCreateTimeSetsDateTime(): void
     {
-        $dateTime = new DateTimeImmutable();
-        $this->draft->setCreateTime($dateTime);
-        
-        $this->assertSame($dateTime, $this->draft->getCreateTime());
+        $draft = $this->createDraft();
+        $dateTime = new \DateTimeImmutable();
+        $draft->setCreateTime($dateTime);
+
+        $this->assertSame($dateTime, $draft->getCreateTime());
     }
 
-    public function testGetCreateTime_returnsNullByDefault(): void
+    public function testGetCreateTimeReturnsNullByDefault(): void
     {
-        $this->assertNull($this->draft->getCreateTime());
+        $draft = $this->createDraft();
+        $this->assertNull($draft->getCreateTime());
     }
 
-    public function testSetUpdateTime_setsDateTime(): void
+    public function testSetUpdateTimeSetsDateTime(): void
     {
-        $dateTime = new DateTimeImmutable();
-        $this->draft->setUpdateTime($dateTime);
-        
-        $this->assertSame($dateTime, $this->draft->getUpdateTime());
+        $draft = $this->createDraft();
+        $dateTime = new \DateTimeImmutable();
+        $draft->setUpdateTime($dateTime);
+
+        $this->assertSame($dateTime, $draft->getUpdateTime());
     }
 
-    public function testGetUpdateTime_returnsNullByDefault(): void
+    public function testGetUpdateTimeReturnsNullByDefault(): void
     {
-        $this->assertNull($this->draft->getUpdateTime());
+        $draft = $this->createDraft();
+        $this->assertNull($draft->getUpdateTime());
     }
-} 
+}

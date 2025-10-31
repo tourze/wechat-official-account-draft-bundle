@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace WechatOfficialAccountDraftBundle\EventSubscriber;
 
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
@@ -24,7 +26,7 @@ class DraftListener
 
     public function preRemove(Draft $object): void
     {
-        if ($object->getMediaId() === null) {
+        if (null === $object->getMediaId()) {
             return;
         }
 
