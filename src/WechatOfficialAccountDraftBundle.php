@@ -10,6 +10,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Tourze\BundleDependency\BundleDependencyInterface;
 use Tourze\EasyAdmin\Attribute\Permission\AsPermission;
 use WechatOfficialAccountBundle\WechatOfficialAccountBundle;
+use Tourze\EasyAdminMenuBundle\EasyAdminMenuBundle;
 
 #[AsPermission(title: '公众号草稿箱')]
 class WechatOfficialAccountDraftBundle extends Bundle implements BundleDependencyInterface
@@ -21,6 +22,7 @@ class WechatOfficialAccountDraftBundle extends Bundle implements BundleDependenc
                 'all' => true,
             ],
             WechatOfficialAccountBundle::class => ['all' => true],
+            EasyAdminMenuBundle::class => ['all' => true],
         ];
     }
 
