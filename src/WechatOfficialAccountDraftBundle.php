@@ -9,8 +9,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Tourze\BundleDependency\BundleDependencyInterface;
 use Tourze\EasyAdmin\Attribute\Permission\AsPermission;
-use WechatOfficialAccountBundle\WechatOfficialAccountBundle;
 use Tourze\EasyAdminMenuBundle\EasyAdminMenuBundle;
+use WechatOfficialAccountBundle\WechatOfficialAccountBundle;
 
 #[AsPermission(title: '公众号草稿箱')]
 class WechatOfficialAccountDraftBundle extends Bundle implements BundleDependencyInterface
