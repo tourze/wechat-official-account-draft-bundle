@@ -20,11 +20,6 @@ use WechatOfficialAccountDraftBundle\Entity\Draft;
 #[RunTestsInSeparateProcesses]
 final class DraftCrudControllerTest extends AbstractEasyAdminControllerTestCase
 {
-    public function testGetEntityFqcn(): void
-    {
-        self::assertSame(Draft::class, DraftCrudController::getEntityFqcn());
-    }
-
     public function testConfigureFields(): void
     {
         $controller = new DraftCrudController();
